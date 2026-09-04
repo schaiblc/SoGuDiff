@@ -1,0 +1,55 @@
+# --- downloaded assets (see assets/MANIFEST.md) ------------------------------
+checkpoints/*.pt
+data/*
+!data/README.md
+*.pt
+*.pth
+!crowdnav_env/crowd_nav/models/*/[!.]*.config
+
+# normalization statistics are tracked deliberately -- tiny, and the diffusion
+# policy cannot run without them
+*.npy
+!crowdnav_env/crowd_nav/sogudiff_norm_stats.npy
+*.npz
+
+# --- run outputs -------------------------------------------------------------
+logs/
+results_*/
+wandb/
+mppi_sweep_results/
+
+# docs/INSTALL.md builds acados into third_party/ inside the clone
+third_party/
+
+# acados generates a C project per solver build, named by process/job id
+c_generated_proj*/
+acados_*_ocp_*.json
+acados_ocp*.json
+
+# --- media -------------------------------------------------------------------
+*.mp4
+*.gif
+*.avi
+
+# --- python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.nbc
+*.nbi
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- local site configuration ------------------------------------------------
+scripts/slurm/cluster_env.local.sh
+.env
+
+# --- editors / os ------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store

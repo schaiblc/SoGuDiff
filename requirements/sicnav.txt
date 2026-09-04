@@ -1,0 +1,32 @@
+# SICNav baseline only -- a SEPARATE environment from requirements/main.txt.
+#
+#   conda create -n sicnav python=3.8 && conda activate sicnav
+#   pip install -r requirements/sicnav.txt
+#   pip install -e crowdnav_env
+#   pip install -e baselines/sicnav
+#
+# Why separate: SICNav's MPC solves through CasADi's IPOPT plugin, which
+# resolves reliably only against the conda-forge IPOPT/CasADi build on
+# Python 3.8. Attempting to co-install it with the main environment's
+# torch 2.6 / numpy 1.26 stack breaks the plugin lookup at solve time.
+# Every SICNav evaluation therefore runs under its own interpreter; the
+# evaluation harness itself is environment-agnostic.
+#
+# Install IPOPT from conda-forge BEFORE pip:
+#   conda install -c conda-forge ipopt casadi=3.6.5
+
+casadi==3.6.5
+numpy==1.24.4
+scipy==1.10.1
+torch==2.1.2
+torchvision==0.16.2
+gym==0.21.0
+gymnasium==1.0.0
+matplotlib
+pandas
+PyYAML
+tqdm
+
+# Python-RVO2 (the ORCA implementation) has no PyPI wheel; build from source:
+#   git clone https://github.com/sybrenstuvel/Python-RVO2.git
+#   cd Python-RVO2 && pip install -r requirements.txt && python setup.py build && python setup.py install

@@ -1,0 +1,26 @@
+# Scene generation from photorealistic 3D datasets -- a SEPARATE environment,
+# needed ONLY to regenerate occupancy maps from raw Matterport3D / InteriorGS /
+# TartanGround scans.
+#
+# You do NOT need this environment to train or evaluate: the released scene
+# sets (scripts/download_assets.sh) are the output of this stage, and
+# scenegen/generate_scenes.py onward runs under requirements/main.txt.
+#
+#   conda create -n sogudiff-scenegen python=3.9 && conda activate sogudiff-scenegen
+#   conda install -c conda-forge -c aihabitat habitat-sim=0.3.3 headless
+#   pip install -r requirements/scenegen.txt
+#
+# habitat-sim is conda-only (it ships compiled renderer binaries) and is why
+# this stage cannot share the main environment's Python version.
+
+numpy==1.26.4
+scipy==1.13.1
+numba==0.60.0
+scikit-fmm
+numpy-quaternion==2024.0.13
+trimesh==4.12.2
+open3d==0.18.0
+opencv-python
+matplotlib
+Pillow
+tqdm

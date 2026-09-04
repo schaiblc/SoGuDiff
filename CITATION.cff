@@ -1,0 +1,18 @@
+# TODO before release: fill in authors, venue, DOI and repository URL.
+# The title matches the paper; everything marked TODO still needs you.
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
+authors:
+  - family-names: "TODO"
+    given-names: "TODO"
+license: MIT
+repository-code: "https://github.com/TODO/sogudiff"
+preferred-citation:
+  type: conference-paper
+  title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
+  authors:
+    - family-names: "TODO"
+      given-names: "TODO"
+  collection-title: "TODO: venue"
+  year: 2026

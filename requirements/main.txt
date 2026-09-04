@@ -1,0 +1,89 @@
+# Main environment: SoGuDiff training and inference, the CrowdNav evaluation
+# harness, and every baseline except SICNav.
+#
+#   python3.10 -m venv .venv && source .venv/bin/activate
+#   pip install "pip==23.3.2"                       # see the gym note below
+#   pip install "setuptools==65.5.0" "wheel==0.38.4"
+#   pip install --no-build-isolation "gym==0.21.0"
+#   pip install -r requirements/main.txt
+#   pip install -e crowdnav_env
+#
+# Python-RVO2 must then be built from source -- it has no PyPI distribution and
+# the simulator imports it unconditionally. See docs/INSTALL.md.
+#
+# Python 3.10. Versions are those the reported results were produced with.
+# acados is installed separately -- see docs/INSTALL.md -- because it needs a
+# compiled C library and cannot come from PyPI alone. It is required only by
+# the diffusion policy's projection layer and the online-expert ablation;
+# every other policy runs without it.
+
+# --- core numerics -----------------------------------------------------------
+# numpy is held below 2.0: numba 0.61 and gym 0.21 both break against the
+# NumPy 2 ABI, and the expert generator's numba kernels are on the hot path.
+numpy==1.26.4
+scipy==1.15.1
+numba==0.61.0
+scikit-fmm==2022.8.15          # signed-distance fields for the map cost term
+Pillow==10.4.0                 # occupancy-map I/O in scenegen/
+
+# --- deep learning -----------------------------------------------------------
+# Install the torch build matching your CUDA version first if you need a
+# non-default one: https://pytorch.org/get-started/locally/
+torch==2.6.0
+diffusers==0.36.0              # DDPM/DDIM schedulers; the UNet1D itself is the
+                               # vendored fork in diffusers_unet_1d_condition/
+
+# --- projection layer --------------------------------------------------------
+# casadi builds the unicycle model symbolically for acados
+# (crowd_nav/policy/projection_unicycle_model.py). acados itself is installed
+# separately; see docs/INSTALL.md.
+casadi==3.7.0
+
+# --- simulation --------------------------------------------------------------
+# gym is held at 0.21: the CrowdNav environments and every vendored baseline
+# fork use the pre-0.22 step/reset API.
+#
+# It only builds under the exact toolchain pinned in the header above, because
+# its setup.py declares `opencv-python>=3.`, which is not a valid PEP 440
+# specifier. setuptools >= 66 rejects it outright, wheel >= 0.40 rejects it
+# while generating metadata, and pip >= 24.1 rejects the finished wheel's
+# metadata -- and `pip install "setuptools<66"` alone does NOT help, because
+# pip builds in an isolated environment with its own newest setuptools, which
+# is why the --no-build-isolation install above is a separate step.
+#
+# Installing gym as part of this file (rather than before it) therefore fails
+# and takes the whole requirements install down with it.
+gym==0.21.0
+
+# Python-RVO2 (module name `rvo2`) is a REQUIRED dependency of this
+# environment, not just of SICNav: crowd_sim/envs/crowd_sim.py imports it at
+# module level, so every policy needs it. It has no PyPI distribution and
+# cannot be listed here; build it from source (needs cmake and a C++ compiler):
+#
+#   pip install "Cython<3"     # its own requirements.txt pins Cython 0.21.1,
+#                              # which does not build on Python 3.10
+#   git clone https://github.com/sybrenstuvel/Python-RVO2.git
+#   cd Python-RVO2 && python setup.py build && pip install --no-build-isolation .
+
+# --- plotting and video ------------------------------------------------------
+# Video writing shells out to an ffmpeg binary; set SOGUDIFF_FFMPEG if it is
+# not on PATH.
+matplotlib==3.10.0
+tqdm==4.67.1
+
+# --- required by the vendored baseline forks ---------------------------------
+# Not imported by this repository's own code, but the DSRNN, NaviSTAR, HEIGHT
+# and RGL training stacks need them.
+torchvision==0.21.0
+pandas==2.2.3
+seaborn==0.13.2
+einops==0.8.2
+PyYAML==6.0.2
+imageio==2.37.2
+
+# --- optional: experiment tracking -------------------------------------------
+# Not required. Training imports wandb behind a try/except and falls back to a
+# no-op, so an environment without it runs identically and still prints every
+# metric to stdout. Pass --no_wandb to disable tracking even when installed.
+# wandb==0.21.2
+# tensorboard==2.20.0
