@@ -23,6 +23,10 @@ Navigation** (*TODO: venue, year*).
   <a href="https://github.com/schaiblc/SoGuDiff/releases/tag/v1.0"><b>Weights &amp; data</b></a>
 </p>
 
+<p align="center">
+  <img src="docs/images/teaser.png" alt="A robot planning among pedestrians, showing sampled, selected and dynamically projected trajectories for four different style vectors" width="820">
+</p>
+
 SoGuDiff is a conditional diffusion planner for social robot navigation. It
 generates trajectories conditioned on the crowd, a static occupancy map, and a
 four-dimensional **style vector** — proxemic distance, passing side, yielding,
