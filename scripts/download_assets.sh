@@ -23,11 +23,17 @@ set -euo pipefail
 #   Zenodo record    https://zenodo.org/api/records/<id>/files
 #   Plain web server https://example.org/sogudiff
 #
-# If the release is not public (a private repo, or a draft), set GITHUB_TOKEN
-# with read access as well: release assets ignore a token on the plain download
-# URL, so this script resolves them through the API instead.
+# SOGUDIFF_ASSET_URL must be set: point it at the asset location given
+# alongside this code.
 # ---------------------------------------------------------------------------
-BASE_URL="${SOGUDIFF_ASSET_URL:-https://github.com/schaiblc/SoGuDiff/releases/download/v1.0}"
+BASE_URL="${SOGUDIFF_ASSET_URL:-}"
+if [ -z "$BASE_URL" ]; then
+    echo "ERROR: SOGUDIFF_ASSET_URL is not set." >&2
+    echo "       Point it at the asset location given alongside this code:" >&2
+    echo "         export SOGUDIFF_ASSET_URL=https://<host>/<path>" >&2
+    echo "       Filenames there are flat; see assets/MANIFEST.md." >&2
+    exit 2
+fi
 
 # Zenodo's API serves a file's bytes at <base>/<name>/content; other hosts at
 # <base>/<name>.
@@ -35,42 +41,6 @@ case "$BASE_URL" in
     *zenodo.org/api/*) URL_SUFFIX="/content" ;;
     *)                 URL_SUFFIX="" ;;
 esac
-
-# A private GitHub repo needs the API asset endpoint plus a token: the plain
-# releases/download URL ignores credentials and returns HTML. Resolve asset ids
-# once, up front, so the rest of the script just fetches URLs.
-declare -A ASSET_URL=()
-if [ -n "${GITHUB_TOKEN:-}" ] && [[ "$BASE_URL" == *github.com/*/releases/download/* ]]; then
-    _path="${BASE_URL#*github.com/}"; _owner_repo="${_path%%/releases/*}"
-    _tag="${BASE_URL##*/releases/download/}"
-    echo "GITHUB_TOKEN set: trying the API for $_owner_repo@$_tag (needed only if the release is private)"
-    _hdr=(-H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json")
-    # Published releases resolve by tag. A DRAFT has no git tag yet, so fall
-    # back to listing releases, which includes drafts for anyone with push
-    # access, and match on tag_name.
-    _json=$(curl -sf "${_hdr[@]}" \
-        "https://api.github.com/repos/$_owner_repo/releases/tags/$_tag" 2>/dev/null || true)
-    if [ -z "$_json" ]; then
-        _json=$(curl -sf "${_hdr[@]}" \
-            "https://api.github.com/repos/$_owner_repo/releases?per_page=100" 2>/dev/null \
-          | python3 -c 'import json,sys
-tag=sys.argv[1]
-for r in json.load(sys.stdin):
-    if r.get("tag_name")==tag: print(json.dumps(r)); break' "$_tag" 2>/dev/null || true)
-        [ -n "$_json" ] && echo "  (found it as a draft release)"
-    fi
-    if [ -z "$_json" ]; then
-        # Not fatal: a public release downloads fine without any of this, and
-        # plenty of people have GITHUB_TOKEN exported for unrelated reasons.
-        echo "  (token cannot see that release; continuing with public URLs)"
-    else
-        while IFS=$'\t' read -r _n _u; do ASSET_URL["$_n"]="$_u"; done < <(
-            python3 -c 'import json,sys
-d=json.load(sys.stdin)
-for a in d.get("assets", []): print(a["name"], a["url"], sep="\t")' <<<"$_json")
-        echo "  resolved ${#ASSET_URL[@]} assets via the API"
-    fi
-fi
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -115,18 +85,12 @@ fetch() {   # fetch <remote name> <destination>
     # statement that defines it dies under `set -u`.
     local name="$1" dest="$2"
     local url="$BASE_URL/$name$URL_SUFFIX"
-    local -a auth=()
-    if [ -n "${ASSET_URL[$name]:-}" ]; then          # private GitHub release
-        url="${ASSET_URL[$name]}"
-        auth=(-H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/octet-stream")
-    fi
     mkdir -p "$(dirname "$dest")"
     echo "  -> $dest"
     local rc=0
     if have curl; then
-        curl -fL --retry 3 --retry-delay 5 -C - "${auth[@]}" -o "$dest.part" "$url" || rc=$?
+        curl -fL --retry 3 --retry-delay 5 -C - -o "$dest.part" "$url" || rc=$?
     elif have wget; then
-        [ ${#auth[@]} -gt 0 ] && { echo "ERROR: a private release needs curl." >&2; exit 1; }
         wget -c -O "$dest.part" "$url" || rc=$?
     else
         echo "ERROR: neither curl nor wget is available." >&2; exit 1
@@ -135,15 +99,8 @@ fetch() {   # fetch <remote name> <destination>
         rm -f "$dest.part"
         echo "ERROR: could not download '$name' (exit $rc)." >&2
         echo "       URL: $url" >&2
-        if [ ${#auth[@]} -eq 0 ]; then
-            echo "       If the release is private or a draft, export a GITHUB_TOKEN" >&2
-            echo "       with read access and re-run; the script then fetches via the" >&2
-            echo "       GitHub API. Otherwise check that the release and this asset" >&2
-            echo "       name exist, or override the host with SOGUDIFF_ASSET_URL." >&2
-        else
-            echo "       A token was used, so it may lack read access to this repo," >&2
-            echo "       or the asset name may not match what the release carries." >&2
-        fi
+        echo "       Check that the release and this asset name exist, or" >&2
+        echo "       point SOGUDIFF_ASSET_URL at another host." >&2
         exit 1
     fi
     mv -f "$dest.part" "$dest"

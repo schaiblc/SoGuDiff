@@ -33,6 +33,11 @@ pip install -r requirements/main.txt
 pip install -e crowdnav_env
 ```
 
+Everything in `requirements/main.txt` installs from a PyPI wheel except
+`scikit-fmm`, which publishes only a source distribution and is compiled during
+the install, so a C++ compiler must be on `PATH` (on Debian/Ubuntu,
+`build-essential`). The same compiler covers Python-RVO2 below.
+
 Then build Python-RVO2, which has no PyPI distribution — this is **not**
 optional, and not only for SICNav: `crowd_sim/envs/crowd_sim.py` imports `rvo2`
 at module level, so every policy needs it. It compiles a small C++ library, so
@@ -175,12 +180,15 @@ TartanGround; see [assets/MANIFEST.md](../assets/MANIFEST.md).
 
 ## Assets
 
-Weights and datasets are attached to this repository's GitHub Release.
-`scripts/download_assets.sh` places every file where the shipped configs expect
-it and verifies each against a sha256 checksum, so a truncated download is
-caught rather than silently used.
+Weights and datasets are hosted separately from the code. Set
+`SOGUDIFF_ASSET_URL` to the location given alongside this code;
+`scripts/download_assets.sh` then places every file where the shipped configs
+expect it and verifies each against a sha256 checksum, so a truncated download
+is caught rather than silently used.
 
 ```bash
+# from the repository root
+export SOGUDIFF_ASSET_URL=...            # asset location given alongside this code
 scripts/download_assets.sh               # weights + 500-scene eval set (~715 MB)
 scripts/download_assets.sh weights       # weights only (~710 MB)
 scripts/download_assets.sh all           # adds maps and demos (~3.6 GB down)
@@ -227,10 +235,10 @@ python setup.py build && pip install --no-build-isolation .
 which newer sysroots no longer ship (`fatal error: crypt.h: No such file or
 directory`).
 
-**Asset download returns 404 or "Not Found".** The release may not be
-published yet, or you may be working from a fork without access to it. Point
-the script at your own copy with `SOGUDIFF_ASSET_URL`, or set `GITHUB_TOKEN`
-(read access) if you have been given access to a pre-release copy.
+**Asset download returns 404 or "Not Found".** Check that the asset name in
+`scripts/download_assets.sh` matches what the release carries. If you are
+working from a fork that has no release of its own, point the script at another
+host with `SOGUDIFF_ASSET_URL`.
 
 **`ImportError: ... requires acados_template`** — expected when acados is not
 installed; only the diffusion policy and MPPI ablation need it.

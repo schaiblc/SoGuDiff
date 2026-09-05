@@ -1,27 +1,11 @@
 # SoGuDiff — Socially Guided Diffusion for Robot Navigation
 
-> **TODO before release**
-> - Replace the four remaining `TODO_*` links below and the venue/year.
-> - Fill in authors and the repository URL here and in `CITATION.cff`.
-> - Publish the `v1.0` release and make the repository public when the paper is
->   out. `scripts/download_assets.sh` then works as documented, with no token
->   and no edits. (While the repo is private, downloads need a `GITHUB_TOKEN`;
->   that is a temporary condition and is deliberately not documented below.)
-> - Add the paper venue and project website link to the GitHub "About" section.
->
-> Everything else is ready.
-
 Reference implementation for
 **SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot
-Navigation** (*TODO: venue, year*).
+Navigation** (under review).
 
-<p align="center">
-  <a href="TODO_ARXIV_URL"><b>arXiv</b></a> &nbsp;·&nbsp;
-  <a href="TODO_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;·&nbsp;
-  <a href="TODO_PROJECT_PAGE_URL"><b>Project page</b></a> &nbsp;·&nbsp;
-  <a href="TODO_YOUTUBE_URL"><b>Video</b></a> &nbsp;·&nbsp;
-  <a href="https://github.com/schaiblc/SoGuDiff/releases/tag/v1.0"><b>Weights &amp; data</b></a>
-</p>
+Model weights and datasets are hosted separately; see
+[assets/MANIFEST.md](assets/MANIFEST.md).
 
 <p align="center">
   <img src="docs/images/teaser.png" alt="A robot planning among pedestrians, showing sampled, selected and dynamically projected trajectories for four different style vectors" width="820">
@@ -60,7 +44,7 @@ all ten baselines under one common action space.
 ## Quick start
 
 ```bash
-git clone <REPO URL> sogudiff && cd sogudiff
+cd sogudiff        # the extracted or cloned repository
 
 python3.10 -m venv .venv && source .venv/bin/activate
 
@@ -95,6 +79,8 @@ it needs no download. It runs 500 short episodes in well under a minute.
 Then fetch the model weights (~710 MB):
 
 ```bash
+cd ../..                        # back to the repository root
+export SOGUDIFF_ASSET_URL=...   # the asset location given alongside this code
 scripts/download_assets.sh weights
 ```
 
@@ -133,6 +119,7 @@ the **separate environment SICNav needs**. Both are covered in
 One command, no scheduler required:
 
 ```bash
+# from the repository root
 scripts/run_baseline_table.sh                    # all methods, 500 scenes
 scripts/run_baseline_table.sh --only ORCA,SFM    # a subset first
 ```
@@ -286,6 +273,7 @@ each can be skipped by downloading that stage's output instead — see
 4. **Diffusion training** (`sogudiff/train.py`), ~500k-1M steps on one GPU.
 
 ```bash
+# from the repository root
 python sogudiff/train.py \
     --dataset_dirs data/expert/custom data/expert/interiorgs \
                    data/expert/matterport data/expert/tartanground \
@@ -312,10 +300,11 @@ sweeps and composition experiments, and how to render comparison videos.
 ## Citation
 
 ```bibtex
-@inproceedings{TODO_citekey,
-  title     = {TODO: paper title},
-  author    = {TODO: author list},
-  booktitle = {TODO: venue},
+@inproceedings{sogudiff2026,
+  title     = {SoGuDiff: Socially Guided Diffusion for Steerable,
+               Norm-Grounded Robot Navigation},
+  author    = {Anonymous},
+  booktitle = {Under review},
   year      = {2026}
 }
 ```

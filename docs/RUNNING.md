@@ -62,12 +62,14 @@ many are taken.
 Either download the set:
 
 ```bash
+# from the repository root ($SOGUDIFF_ASSET_URL must be set -- see docs/INSTALL.md)
 scripts/download_assets.sh eval-scenes        # -> data/scenes/eval_500
 ```
 
 or rebuild it — it is deterministic given the seed, and takes under a minute:
 
 ```bash
+# from the repository root
 python scenegen/build_eval_set_500.py --out_dir data/scenes/eval_500 --seed 0
 ```
 
@@ -93,7 +95,7 @@ SICNav runs identically but from its own interpreter, and needs
 `configs/policy_sicnav.config`:
 
 ```bash
-PYTHONPATH=../..:$PYTHONPATH "$SOGUDIFF_SICNAV_PYTHON" evaluate.py \
+PYTHONPATH=..:$PYTHONPATH "$SOGUDIFF_SICNAV_PYTHON" evaluate.py \
     --policy sicnav --policy_config configs/policy_sicnav.config \
     --phase test --no_video --results_suffix sicnav
 ```

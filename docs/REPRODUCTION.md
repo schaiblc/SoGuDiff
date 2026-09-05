@@ -63,7 +63,10 @@ space.
 
 ## Running evaluations
 
-1. `scripts/download_assets.sh weights` — model weights. The comparison
+Run these from the repository root.
+
+1. `scripts/download_assets.sh weights` — model weights (needs
+   `SOGUDIFF_ASSET_URL`; see docs/INSTALL.md). The comparison
    table needs nothing else; add `eval-scenes` for the style experiments.
 2. `scripts/run_baseline_table.sh` — every method on the 500 procedural scenes.
 3. Observe `crowdnav_env/crowd_nav/results_<METHOD>/`.

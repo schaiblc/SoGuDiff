@@ -23,6 +23,8 @@
 numpy==1.26.4
 scipy==1.15.1
 numba==0.61.0
+# scikit-fmm publishes no wheels, so pip compiles it from source. A C++
+# compiler must be on PATH -- the same requirement Python-RVO2 has below.
 scikit-fmm==2022.8.15          # signed-distance fields for the map cost term
 Pillow==10.4.0                 # occupancy-map I/O in scenegen/
 

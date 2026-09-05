@@ -83,7 +83,8 @@ breakdown and the exact commands.
 
 ## Where these come from
 
-All 19 files are attached to this repository's GitHub Release, and
+All 19 files live at the asset location given alongside this code
+(`SOGUDIFF_ASSET_URL`), and
 `scripts/download_assets.sh` fetches them by exact filename. Filenames are flat
 and significant; the local destinations in the tables above are created for
 you.
