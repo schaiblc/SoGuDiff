@@ -1,9 +1,16 @@
 import torch.nn as nn
-from training.networks.envs import VecNormalize
-
 
 
 def get_vec_normalize(venv):
+    # Imported here rather than at module level: training/networks/envs.py
+    # does `from baselines import bench`, and OpenAI baselines cannot be
+    # pip-installed (its sdist builds mujoco-py). Evaluation reaches this
+    # module only for AddBias/init via distributions.py -> model.py, so a
+    # module-level import made the HEIGHT policy unloadable for anyone
+    # without a prebuilt baselines. Training, which needs baselines anyway,
+    # is unaffected.
+    from training.networks.envs import VecNormalize
+
     if isinstance(venv, VecNormalize):
         return venv
     elif hasattr(venv, 'venv'):

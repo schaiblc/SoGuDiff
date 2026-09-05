@@ -901,6 +901,10 @@ class SoGuDiff(Policy):
         except Exception as e:
             print(f"torch.compile unavailable, falling back to eager UNet: {e}")
 
+        # configure() builds everything on whatever hardware it finds, but the
+        # caller decides the device afterwards via set_device() -- see the
+        # override below, which is what keeps the two in agreement.
+
         # ── PROJECTION ──────────────────────────────────────────────────
         # Optional config knobs (with defaults) — add these to your config
         # under [sogudiff] if you want non-default values.
@@ -1744,6 +1748,29 @@ class SoGuDiff(Policy):
         theta  = s_lo[2] + frac * dtheta
 
         return float(px), float(py), float(theta), float(v), float(omega)
+
+    def set_device(self, device):
+        """Move the policy onto ``device``, not just record it.
+
+        The base Policy.set_device only assigns ``self.device``. configure()
+        builds the modules on whatever hardware happens to be present, so on a
+        GPU machine a caller asking for CPU -- ``evaluate.py`` without --gpu,
+        which resolves the device as ``cuda if is_available() and args.gpu``
+        -- used to leave the weights on CUDA while every input tensor was
+        built on CPU, and the first forward pass died with "Expected all
+        tensors to be on the same device". Everything that lives on a device
+        moves here: the three modules, the scheduler's buffers, and the
+        cached normalization statistics.
+        """
+        self.device = device
+        for module in (self.token_embedder, self.model, self.style_embedder):
+            if module is not None:
+                module.to(device)
+        if getattr(self, 'noise_scheduler', None) is not None:
+            self.noise_scheduler = move_scheduler_to_device(
+                self.noise_scheduler, device)
+        if getattr(self, 'norm_t', None):
+            self.norm_t = {k: v.to(device) for k, v in self.norm_t.items()}
 
     # =================================================================
     # predict()

@@ -187,12 +187,23 @@ get_archive() {
         exit 1
     }
     echo "  unpacking $tmp"
-    mkdir -p "$dest"
+    # Unpack into a staging directory and move it into place only after tar
+    # succeeds. Unpacking straight into $dest would leave a half-populated
+    # directory behind if the run is interrupted -- and the "already present"
+    # check above only tests that $dest is non-empty, so the next run would
+    # skip it and leave the dataset quietly incomplete. These archives are
+    # tens of GB; being interrupted is a normal event, not an edge case.
+    local stage="$dest.unpacking"
+    rm -rf "$stage"
+    mkdir -p "$stage"
     if have zstd; then
-        tar --use-compress-program=unzstd -xf "$tmp" -C "$dest" --strip-components=1
+        tar --use-compress-program=unzstd -xf "$tmp" -C "$stage" --strip-components=1
     else
         echo "ERROR: zstd is required to unpack $tmp (apt install zstd)." >&2; exit 1
     fi
+    rm -rf "$dest"
+    mkdir -p "$(dirname "$dest")"
+    mv "$stage" "$dest"
     rm -f "$tmp"
 }
 

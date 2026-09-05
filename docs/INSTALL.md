@@ -204,6 +204,29 @@ section.
 Python-RVO2 — its `requirements.txt` pinned `Cython==0.21.1`. Install
 `"Cython<3"` instead and build with `python setup.py build`.
 
+**`ld: cannot find /lib64/libm.so.6`** while building Python-RVO2, usually in
+the Python 3.8 SICNav environment. This appears on systems that do not lay
+libraries out under `/lib64` — a Gentoo Prefix, Nix, or an HPC software stack
+mounted somewhere else — where conda's own toolchain cannot find the host C
+library. It does not occur on a distribution with a conventional `/lib64`.
+Give the environment a self-contained toolchain and stop Python from
+overriding its sysroot:
+
+```bash
+conda install -c conda-forge gcc_linux-64 gxx_linux-64 sysroot_linux-64 libxcrypt
+export CC="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-cc"
+export CXX="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-c++"
+export CPATH="$CONDA_PREFIX/include"
+# Python 3.8's build config injects `-Wl,--sysroot=/`, which sends the linker
+# to the host's absent /lib64 instead of the toolchain's own sysroot.
+export LDSHARED="$CXX -pthread -shared"
+python setup.py build && pip install --no-build-isolation .
+```
+
+`libxcrypt` is needed because Python 3.8's `Python.h` includes `crypt.h`,
+which newer sysroots no longer ship (`fatal error: crypt.h: No such file or
+directory`).
+
 **Asset download returns 404 or "Not Found".** The release may not be
 published yet, or you may be working from a fork without access to it. Point
 the script at your own copy with `SOGUDIFF_ASSET_URL`, or set `GITHUB_TOKEN`
