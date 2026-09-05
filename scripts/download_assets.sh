@@ -22,18 +22,8 @@ set -euo pipefail
 #   GitHub Release   https://github.com/<user>/<repo>/releases/download/<tag>
 #   Zenodo record    https://zenodo.org/api/records/<id>/files
 #   Plain web server https://example.org/sogudiff
-#
-# SOGUDIFF_ASSET_URL must be set: point it at the asset location given
-# alongside this code.
 # ---------------------------------------------------------------------------
-BASE_URL="${SOGUDIFF_ASSET_URL:-}"
-if [ -z "$BASE_URL" ]; then
-    echo "ERROR: SOGUDIFF_ASSET_URL is not set." >&2
-    echo "       Point it at the asset location given alongside this code:" >&2
-    echo "         export SOGUDIFF_ASSET_URL=https://<host>/<path>" >&2
-    echo "       Filenames there are flat; see assets/MANIFEST.md." >&2
-    exit 2
-fi
+BASE_URL="${SOGUDIFF_ASSET_URL:-ONPUBLICATION_RELEASE_DOWNLOAD_URL}"
 
 # Zenodo's API serves a file's bytes at <base>/<name>/content; other hosts at
 # <base>/<name>.

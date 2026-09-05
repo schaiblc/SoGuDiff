@@ -180,15 +180,13 @@ TartanGround; see [assets/MANIFEST.md](../assets/MANIFEST.md).
 
 ## Assets
 
-Weights and datasets are hosted separately from the code. Set
-`SOGUDIFF_ASSET_URL` to the location given alongside this code;
-`scripts/download_assets.sh` then places every file where the shipped configs
-expect it and verifies each against a sha256 checksum, so a truncated download
-is caught rather than silently used.
+Weights and datasets are attached to this repository's GitHub Release.
+`scripts/download_assets.sh` places every file where the shipped configs expect
+it and verifies each against a sha256 checksum, so a truncated download is
+caught rather than silently used.
 
 ```bash
 # from the repository root
-export SOGUDIFF_ASSET_URL=...            # asset location given alongside this code
 scripts/download_assets.sh               # weights + 500-scene eval set (~715 MB)
 scripts/download_assets.sh weights       # weights only (~710 MB)
 scripts/download_assets.sh all           # adds maps and demos (~3.6 GB down)

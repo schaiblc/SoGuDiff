@@ -2,10 +2,15 @@
 
 Reference implementation for
 **SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot
-Navigation** (under review).
+Navigation** (*ONPUBLICATION: venue, year*).
 
-Model weights and datasets are hosted separately; see
-[assets/MANIFEST.md](assets/MANIFEST.md).
+<p align="center">
+  <a href="ONPUBLICATION_ARXIV_URL"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
+  <a href="ONPUBLICATION_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;&middot;&nbsp;
+  <a href="ONPUBLICATION_PROJECT_PAGE_URL"><b>Project page</b></a> &nbsp;&middot;&nbsp;
+  <a href="ONPUBLICATION_YOUTUBE_URL"><b>Video</b></a> &nbsp;&middot;&nbsp;
+  <a href="ONPUBLICATION_RELEASE_URL"><b>Weights &amp; data</b></a>
+</p>
 
 <p align="center">
   <img src="docs/images/teaser.png" alt="A robot planning among pedestrians, showing sampled, selected and dynamically projected trajectories for four different style vectors" width="820">
@@ -44,7 +49,7 @@ all ten baselines under one common action space.
 ## Quick start
 
 ```bash
-cd sogudiff        # the extracted or cloned repository
+git clone <ONPUBLICATION_REPO_URL> sogudiff && cd sogudiff
 
 python3.10 -m venv .venv && source .venv/bin/activate
 
@@ -80,7 +85,6 @@ Then fetch the model weights (~710 MB):
 
 ```bash
 cd ../..                        # back to the repository root
-export SOGUDIFF_ASSET_URL=...   # the asset location given alongside this code
 scripts/download_assets.sh weights
 ```
 
@@ -303,8 +307,8 @@ sweeps and composition experiments, and how to render comparison videos.
 @inproceedings{sogudiff2026,
   title     = {SoGuDiff: Socially Guided Diffusion for Steerable,
                Norm-Grounded Robot Navigation},
-  author    = {Anonymous},
-  booktitle = {Under review},
+  author    = {ONPUBLICATION: author list},
+  booktitle = {ONPUBLICATION: venue},
   year      = {2026}
 }
 ```

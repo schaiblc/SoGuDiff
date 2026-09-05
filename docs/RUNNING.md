@@ -62,7 +62,7 @@ many are taken.
 Either download the set:
 
 ```bash
-# from the repository root ($SOGUDIFF_ASSET_URL must be set -- see docs/INSTALL.md)
+# from the repository root
 scripts/download_assets.sh eval-scenes        # -> data/scenes/eval_500
 ```
 

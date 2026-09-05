@@ -2,12 +2,13 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the paper below."
 title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
 authors:
-  - name: "Anonymous"
+  - name: "ONPUBLICATION: author list"
 license: MIT
+repository-code: "ONPUBLICATION: repository URL"
 preferred-citation:
   type: conference-paper
   title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
   authors:
-    - name: "Anonymous"
-  notes: "Under review."
+    - name: "ONPUBLICATION: author list"
+  collection-title: "ONPUBLICATION: venue"
   year: 2026
