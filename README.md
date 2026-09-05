@@ -7,7 +7,7 @@ Navigation** (*ONPUBLICATION: venue, year*).
 <p align="center">
   <a href="ONPUBLICATION_ARXIV_URL"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
   <a href="ONPUBLICATION_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;&middot;&nbsp;
-  <a href="ONPUBLICATION_PROJECT_PAGE_URL"><b>Project page</b></a> &nbsp;&middot;&nbsp;
+  <a href="ONPUBLICATION_PROJECT_PAGE_URL"><b>Project website</b></a> &nbsp;&middot;&nbsp;
   <a href="ONPUBLICATION_YOUTUBE_URL"><b>Video</b></a> &nbsp;&middot;&nbsp;
   <a href="ONPUBLICATION_RELEASE_URL"><b>Weights &amp; data</b></a>
 </p>
