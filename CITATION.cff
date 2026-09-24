@@ -2,13 +2,37 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the paper below."
 title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
 authors:
-  - name: "ONPUBLICATION: author list"
+  - family-names: "Schaible"
+    given-names: "Christian"
+    affiliation: "University of Waterloo"
+  - family-names: "Ji"
+    given-names: "Haoran"
+    affiliation: "McMaster University"
+  - family-names: "Pant"
+    given-names: "Yash Vardhan"
+    affiliation: "University of Waterloo"
+  - family-names: "Smith"
+    given-names: "Stephen L."
+    affiliation: "University of Waterloo"
 license: MIT
-repository-code: "ONPUBLICATION: repository URL"
+repository-code: "https://github.com/schaiblc/SoGuDiff"
+url: "https://sogudiff.github.io/"
+# ONPUBLICATION: add the arXiv URL and identifier to preferred-citation once assigned.
 preferred-citation:
-  type: conference-paper
+  type: article
   title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
   authors:
-    - name: "ONPUBLICATION: author list"
-  collection-title: "ONPUBLICATION: venue"
+    - family-names: "Schaible"
+      given-names: "Christian"
+      affiliation: "University of Waterloo"
+    - family-names: "Ji"
+      given-names: "Haoran"
+      affiliation: "McMaster University"
+    - family-names: "Pant"
+      given-names: "Yash Vardhan"
+      affiliation: "University of Waterloo"
+    - family-names: "Smith"
+      given-names: "Stephen L."
+      affiliation: "University of Waterloo"
+  journal: "arXiv preprint"
   year: 2026

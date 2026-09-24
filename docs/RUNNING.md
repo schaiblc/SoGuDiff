@@ -320,7 +320,7 @@ Each `.npz` needs:
 | `start_state` | `(2,)` | no — defaults to the first waypoint |
 | `goal` | `(2,)` | no — defaults to the last waypoint |
 | `obstacles` | `(k, 4)` | no — defaults to none. Each row is a pedestrian as (x, y, vx, vy) |
-| `occupancy_map` | `(map_size, map_size)` | no — needed with `--use_map`. Ego-centerd, robot at the center cell, +x forward |
+| `occupancy_map` | `(map_size, map_size)` | no — needed with `--use_map`. Ego-centered, robot at the center cell, +x forward |
 | `has_map` | scalar | no — inferred from whether `occupancy_map` is present |
 
 Anything else in the file is ignored, so the extra diagnostic fields our

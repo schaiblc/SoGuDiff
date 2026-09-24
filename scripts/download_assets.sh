@@ -23,7 +23,7 @@ set -euo pipefail
 #   Zenodo record    https://zenodo.org/api/records/<id>/files
 #   Plain web server https://example.org/sogudiff
 # ---------------------------------------------------------------------------
-BASE_URL="${SOGUDIFF_ASSET_URL:-ONPUBLICATION_RELEASE_DOWNLOAD_URL}"
+BASE_URL="${SOGUDIFF_ASSET_URL:-https://github.com/schaiblc/SoGuDiff/releases/download/v1.0}"
 
 # Zenodo's API serves a file's bytes at <base>/<name>/content; other hosts at
 # <base>/<name>.

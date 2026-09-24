@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Code under baselines/ is derived from third-party projects and remains under
-their own licences; see baselines/NOTICE.md.
-
-diffusers_unet_1d_condition/ is vendored unmodified from
-https://github.com/lucainiaoge/diffusers-unet-1d-condition, itself an
-adaptation of HuggingFace Diffusers v0.30.3, and remains under the Apache
-License 2.0; see diffusers_unet_1d_condition/LICENSE.

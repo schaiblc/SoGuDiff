@@ -11,7 +11,7 @@ Upstream licenses are retained inside each directory and continue to govern
 that code. This repository's own MIT license covers only the modifications and
 the surrounding harness.
 
-| Directory | Upstream | License | Paper rows |
+| Directory | Upstream | License | Policies |
 |---|---|---|---|
 | `dsrnn/` | [Shuijing725/CrowdNav_DSRNN](https://github.com/Shuijing725/CrowdNav_DSRNN) | MIT (© 2021 Shuijing725) | `dsrnn`, `dsrnn_holonomic` |
 | `navistar/` | [SAN-NaviSTAR](https://github.com/SMARTlab-Purdue/SAN-NaviSTAR) | MIT (© 2024 Weizheng Wang) | `navistar`, `navistar_holonomic` |
@@ -31,7 +31,7 @@ The same three changes apply to `dsrnn/`, `navistar/` and `height/`:
    unicycle-native was attempted and did not converge, so each keeps its
    authors' holonomic action space and training recipe. The conversion to a
    shared action space happens at evaluation time instead, by projecting
-   (vx, vy) onto the unicycle envelope. Both arms are reported.
+   (vx, vy) onto the unicycle envelope.
 3. **Cluster compatibility.** Optional heavy imports -- pybullet-backed
    TurtleBot environments in particular -- are made lazy so the training code
    runs on machines without those dependencies. No numerical behavior changes.

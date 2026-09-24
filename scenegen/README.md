@@ -17,8 +17,7 @@ Builds the evaluation and training scene sets, in pipeline order.
 Only `occupancy_from_matterport.py` needs the separate `scenegen` environment
 (`requirements/scenegen.txt`); everything downstream runs in the main one.
 
-The released scene sets are this pipeline's output, so you do not need to run
-any of it to train or evaluate — see [../assets/MANIFEST.md](../assets/MANIFEST.md).
+The scene sets are this pipeline's output.
 Regenerating maps requires your own licensed copy of the source datasets.
 
 See [../docs/RUNNING.md](../docs/RUNNING.md) for the full command sequence.

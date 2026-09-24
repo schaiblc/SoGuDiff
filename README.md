@@ -2,14 +2,19 @@
 
 Reference implementation for
 **SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot
-Navigation** (*ONPUBLICATION: venue, year*).
+Navigation**.
+
+<p align="center">
+  Christian Schaible<sup>1</sup>, Haoran Ji<sup>2</sup>, Yash Vardhan Pant<sup>1</sup>, Stephen L. Smith<sup>1</sup><br>
+  <sup>1</sup>University of Waterloo &nbsp;&nbsp; <sup>2</sup>McMaster University
+</p>
 
 <p align="center">
   <a href="ONPUBLICATION_ARXIV_URL"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
   <a href="ONPUBLICATION_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;&middot;&nbsp;
-  <a href="ONPUBLICATION_PROJECT_PAGE_URL"><b>Project website</b></a> &nbsp;&middot;&nbsp;
-  <a href="ONPUBLICATION_YOUTUBE_URL"><b>Video</b></a> &nbsp;&middot;&nbsp;
-  <a href="ONPUBLICATION_RELEASE_URL"><b>Weights &amp; data</b></a>
+  <a href="https://sogudiff.github.io/"><b>Project website</b></a> &nbsp;&middot;&nbsp;
+  <a href="https://youtu.be/wsqTSdGBZrw"><b>Video</b></a> &nbsp;&middot;&nbsp;
+  <a href="https://github.com/schaiblc/SoGuDiff/releases/tag/v1.0"><b>Weights &amp; data</b></a>
 </p>
 
 <p align="center">
@@ -49,7 +54,7 @@ all ten baselines under one common action space.
 ## Quick start
 
 ```bash
-git clone <ONPUBLICATION_REPO_URL> sogudiff && cd sogudiff
+git clone https://github.com/schaiblc/SoGuDiff.git sogudiff && cd sogudiff
 
 python3.10 -m venv .venv && source .venv/bin/activate
 
@@ -304,12 +309,13 @@ sweeps and composition experiments, and how to render comparison videos.
 ## Citation
 
 ```bibtex
-@inproceedings{sogudiff2026,
-  title     = {SoGuDiff: Socially Guided Diffusion for Steerable,
-               Norm-Grounded Robot Navigation},
-  author    = {ONPUBLICATION: author list},
-  booktitle = {ONPUBLICATION: venue},
-  year      = {2026}
+@article{schaible2026sogudiff,
+  title   = {SoGuDiff: Socially Guided Diffusion for Steerable,
+             Norm-Grounded Robot Navigation},
+  author  = {Schaible, Christian and Ji, Haoran and Pant, Yash Vardhan
+             and Smith, Stephen L.},
+  journal = {arXiv preprint arXiv:ONPUBLICATION_ARXIV_ID},
+  year    = {2026}
 }
 ```
 
