@@ -10,7 +10,7 @@ procedurally from `configs/env.config` (`test_sim = evaluation`,
 `test_size = 500`, `testoffset = 10`), seeded per episode index, so a scene
 index refers to the same situation for every method and no scene data has to be
 distributed. The saved `.npz` sets are used by the style, composition and
-MPPI-budget experiments instead. Each episode places robot and humans uniformly in a
+ablation experiments instead. Each episode places robot and humans uniformly in a
 15 m square with the robot's goal at least 5 m from its start, 1–10 humans,
 radii 0.25 m, `v_pref` 1 m/s, a 0.25 s time step and a 25 s limit.
 
@@ -52,8 +52,7 @@ space.
 ## Known non-determinism
 
 - The diffusion policy samples `num_samples` trajectories per step; run-to-run
-  variation of a few tenths of a percent in success rate is expected. Fix
-  `--seed` for exact repeats.
+  variation of a few tenths of a percent in success rate is expected. Fix the seed for exact repeats.
 - MPPI seeds per scene and style offline, and from a base seed plus a per-call
   counter online. `mppi_seed = -1` makes the sampler genuinely
   nondeterministic.

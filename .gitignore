@@ -14,12 +14,14 @@ data/*
 
 # --- run outputs -------------------------------------------------------------
 logs/
+results/
 results_*/
 wandb/
 mppi_sweep_results/
 
-# docs/INSTALL.md builds acados into third_party/ inside the clone
+# docs/INSTALL.md builds acados and Python-RVO2 inside the clone
 third_party/
+Python-RVO2/
 
 # acados generates a C project per solver build, named by process/job id
 c_generated_proj*/

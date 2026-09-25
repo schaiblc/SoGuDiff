@@ -5,11 +5,6 @@ Reference implementation for
 Navigation**.
 
 <p align="center">
-  Christian Schaible<sup>1</sup>, Haoran Ji<sup>2</sup>, Yash Vardhan Pant<sup>1</sup>, Stephen L. Smith<sup>1</sup><br>
-  <sup>1</sup>University of Waterloo &nbsp;&nbsp; <sup>2</sup>McMaster University
-</p>
-
-<p align="center">
   <a href="ONPUBLICATION_ARXIV_URL"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
   <a href="ONPUBLICATION_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;&middot;&nbsp;
   <a href="https://sogudiff.github.io/"><b>Project website</b></a> &nbsp;&middot;&nbsp;
