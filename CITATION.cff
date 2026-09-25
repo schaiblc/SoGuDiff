@@ -19,7 +19,7 @@ repository-code: "https://github.com/schaiblc/SoGuDiff"
 url: "https://sogudiff.github.io/"
 # ONPUBLICATION: add the arXiv URL and identifier to preferred-citation once assigned.
 preferred-citation:
-  type: article
+  type: generic
   title: "SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation"
   authors:
     - family-names: "Schaible"
@@ -34,5 +34,4 @@ preferred-citation:
     - family-names: "Smith"
       given-names: "Stephen L."
       affiliation: "University of Waterloo"
-  journal: "arXiv preprint"
   year: 2026

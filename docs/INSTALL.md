@@ -102,6 +102,8 @@ library with a Python interface and cannot be installed from PyPI alone.
 **Every other policy runs without it**, so skip this section if you only want
 to reproduce the baseline table.
 
+The reported results were produced with acados commit dab96fc9b (v0.5.4-4-gdab96fc9b).
+
 ```bash
 git clone https://github.com/acados/acados.git third_party/acados
 cd third_party/acados && git submodule update --recursive --init

@@ -4,9 +4,11 @@ Reference implementation for
 **SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot
 Navigation**.
 
+<!-- ONPUBLICATION: add arXiv and Paper links here once the arXiv ID is assigned:
+  <a href="https://arxiv.org/abs/ID"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
+  <a href="https://arxiv.org/pdf/ID"><b>Paper</b></a> &nbsp;&middot;&nbsp;
+-->
 <p align="center">
-  <a href="ONPUBLICATION_ARXIV_URL"><b>arXiv</b></a> &nbsp;&middot;&nbsp;
-  <a href="ONPUBLICATION_PAPER_PDF_URL"><b>Paper</b></a> &nbsp;&middot;&nbsp;
   <a href="https://sogudiff.github.io/"><b>Project website</b></a> &nbsp;&middot;&nbsp;
   <a href="https://youtu.be/wsqTSdGBZrw"><b>Video</b></a> &nbsp;&middot;&nbsp;
   <a href="https://github.com/schaiblc/SoGuDiff/releases/tag/v1.0"><b>Weights &amp; data</b></a>
@@ -303,14 +305,15 @@ sweeps and composition experiments, and how to render comparison videos.
 
 ## Citation
 
+<!-- ONPUBLICATION: once the arXiv ID is assigned, make this an @article with
+     journal = {arXiv preprint arXiv:ID}, matching the project website. -->
 ```bibtex
-@article{schaible2026sogudiff,
-  title   = {SoGuDiff: Socially Guided Diffusion for Steerable,
-             Norm-Grounded Robot Navigation},
-  author  = {Schaible, Christian and Ji, Haoran and Pant, Yash Vardhan
-             and Smith, Stephen L.},
-  journal = {arXiv preprint arXiv:ONPUBLICATION_ARXIV_ID},
-  year    = {2026}
+@misc{schaible2026sogudiff,
+  title  = {SoGuDiff: Socially Guided Diffusion for Steerable,
+            Norm-Grounded Robot Navigation},
+  author = {Schaible, Christian and Ji, Haoran and Pant, Yash Vardhan
+            and Smith, Stephen L.},
+  year   = {2026}
 }
 ```
 
