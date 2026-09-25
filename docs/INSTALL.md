@@ -104,7 +104,7 @@ to reproduce the baseline table.
 
 ```bash
 git clone https://github.com/acados/acados.git third_party/acados
-cd third_party/acados && git checkout v0.5.4 && git submodule update --recursive --init
+cd third_party/acados && git submodule update --recursive --init
 mkdir -p build && cd build
 cmake -DACADOS_WITH_QPOASES=ON ..
 make install -j4
