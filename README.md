@@ -304,13 +304,14 @@ sweeps and composition experiments, and how to render comparison videos.
 ## Citation
 
 ```bibtex
-@article{schaible2026sogudiff,
-  title   = {SoGuDiff: Socially Guided Diffusion for Steerable,
-             Norm-Grounded Robot Navigation},
-  author  = {Schaible, Christian and Ji, Haoran and Pant, Yash Vardhan
-             and Smith, Stephen L.},
-  journal = {arXiv preprint arXiv:2609.30560},
-  year    = {2026}
+@misc{schaible2026sogudiffsociallyguideddiffusion,
+      title={SoGuDiff: Socially Guided Diffusion for Steerable, Norm-Grounded Robot Navigation},
+      author={Christian Schaible and Haoran Ji and Yash Vardhan Pant and Stephen L. Smith},
+      year={2026},
+      eprint={2609.30560},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2609.30560},
 }
 ```
 
